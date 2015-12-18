@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html ng-app = "nameApp">
+<head>
+ <title>My Angular JS Applicatio</title>
+ <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.10/angular.min.js"></script>
+ <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.10/angular-route.min.js"></script>
+ <script type="text/javascript">
+var nameApp = angular.module('nameApp',['ngRoute']);
+nameApp.controller('NameCtrl',function($scope){
+	$scope.names = ['Larry','Curly','Moe'];
+	$scope.addName = function(){$scope.names.push($scope.enteredName); $scope.enteredName = ''};
+	$scope.removeName = function(name){
+		var nametoberemoved = $scope.names.indexOf(name);
+		$scope.names.splice(nametoberemoved,1);
+		;};
+
+});
+
+nameApp.controller("CountryCtrl",function($scope){
+
+	$scope.countries = [
+	{"name" : "China","population":"1359821000","gdp":"40000"},
+	{"name" : "India","population":"1205625000","gdp":"0.54"},
+	{"name" : "United States of America","population":"312247000","gdp":"43.22"}
+
+	];
+$scope.addCountry = function(){
+
+	var myObj = {"name" : $scope.countryname , "population" :$scope.countrypopulation};
+	$scope.countryname = ''; 
+	$scope.countrypopulation = '';
+	$scope.countries.push(myObj);
+};
+
+$scope.removecountry = function(countryName){
+
+$scope.countries.forEach(function(result,index){ 
+
+if(result["name"] == countryName)
+{
+	$scope.countries.splice(index,1);
+}
+
+});
+
+};
+
+});
+
+ </script>
+ </head>
+<body >
+<!-- Start of Name Controller Div-->
+<h1>-- Name Add / Remove Controller --</h1>
+	<div ng-controller = "NameCtrl">
+	<ul>
+		<li ng-repeat = "name in names" id="{{name}}">{{name}} 
+			<a href="#" ng-click = "removeName(name)">Remove Name</a> 
+	</li>
+</ul>
+<form ng-submit ="addName()">
+	<input type = "text" ng-model = "enteredName">
+	<input type ="submit" value = "add">
+	</form>
+</div> <!--Name Controller Div End-->
+<!-- Start of Country Controller -->
+<br/>
+<br />
+<h1>-- Country List / Search Controller --</h1>
+<div ng-controller = "CountryCtrl">
+<div>
+	<label> Search </label>
+	<input ng-model="query" type ="text"/>
+</div>
+<br/>
+<table>
+<thead>
+<th> Country </th>
+<th> Population </th>
+<th> GDP </th>
+<th> Remove Country </th>
+</thead>
+<tbody>
+
+<tr ng-repeat = "country in countries | filter:query | orderBy:'population'">
+<td>{{country.name}}</td>
+<td>{{country.population}}</td>
+<td>{{country.gdp | currency }}</td>
+<td> <a href ="#" ng-click = "removecountry(country.name)">Remove</a><td>
+</tr>
+
+
+
+
+</tbody>
+</table>
+<br/>
+<form ng-submit = "addCountry()">
+Country Name : <input type ="text" ng-model = "countryname">
+Country Population : <input type ="text" ng-model ="countrypopulation">
+<input type ="submit" value ="Add">
+</form>
+
+</div>
+<!-- End of Country Controller -->
+<!-- Start ngRoute Controller -->
+<!-- Ebd ngRoute Controller -->
+</body>
+</html>
