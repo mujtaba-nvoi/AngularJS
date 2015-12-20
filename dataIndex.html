@@ -1,0 +1,52 @@
+<html ng-app = "countryApp">
+<head>
+<title>NG ROUTE</title>
+ <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.10/angular.min.js"></script>
+ <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.10/angular-route.min.js"></script>
+<script type="text/javascript">
+
+
+
+//console.log($http.get().data);
+
+//var countriesList = $http.get("https://restcountries.eu/rest/v1/all").data;
+
+//alert(JSON.stringify(countriesList));
+
+//$scope.countries  = countriesList;
+
+//countriesList;
+
+//.success(function(data){
+//alert(data);
+//$scope.countries = data;
+
+//});
+
+
+});
+</script>
+
+
+</head>
+
+<body>
+<div ng-controller = "CountryCtrl">
+<table>
+<thead>
+<th>Name</th>
+<th>Population</th>
+</thead>
+<tbody>
+<tr ng-repeat = "country in countries">
+<td>{{country.name}}</td>
+<td>{{country.population}}</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+
+</body>
+</html>
