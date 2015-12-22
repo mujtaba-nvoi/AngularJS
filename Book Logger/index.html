@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    
+</head>
+<body ng-app="app">
+
+<div ng-controller="BooksController as books">
+<h1> {{books.appName}}</h1>
+
+<ul>
+<li ng-repeat = "book in books.message"> Book : {{book.title}} - Author : {{book.author}}</li>
+</ul>
+
+<h2> All Readers </h2>
+<ul>
+<li ng-repeat = "reader in books.allreader"> Name : {{reader.name}} - Minutes Read (Total) :{{reader.totalMinutesRead}} - Badge : {{books.getbadge(reader.totalMinutesRead)}}</li>
+</ul>
+
+</div>
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.js"></script>
+<script src="app.js"></script>
+<script src="Controllers/BooksController.js"></script>
+<script src="Services/DataServices.js"></script>
+<script src="Services/loggerService.js"></script>
+<script src="Services/ConstantService.js"></script>
+<script src="Services/BadgeService.js"></script>
+</body>
+</html>
